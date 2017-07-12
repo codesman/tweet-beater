@@ -21,3 +21,19 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/auth/{provider}', 'Auth\LoginController@redirectToProvider')->name('provider');
 Route::get('/auth/{provider}/callback', 'Auth\LoginController@handleProviderCallback')->name('provider.callback');
+
+Route::group(['middleware' => 'auth'], function() {
+    Route::resource('tweet', 'TweetController', [
+        'names' => [
+            'index' => 'tweet.index',
+            'show' => 'tweet.show',
+            'create' => 'tweet.create',
+            'store' => 'tweet.save',
+            'edit' => 'tweet.edit',
+            'update' => 'tweet.update',
+            'destroy' => 'tweet.delete',
+        ]
+    ]);
+});
+
+
