@@ -14,7 +14,13 @@ class TweetController extends Controller
      */
     public function index()
     {
-        return view('tweet.index');
+        $tweets = Tweet::all();
+        $table_headers = [
+            'subject' => 'Subject',
+            'url' => 'URL',
+            'image' => 'Image'
+        ];
+        return view('tweet.index', compact('tweets', 'table_headers'));
     }
 
     /**
